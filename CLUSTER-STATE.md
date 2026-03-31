@@ -17,7 +17,7 @@
 | pve-01 | HP EliteDesk 705 G4 | k3s server (control plane) | 192.168.30.101 | ✅ Proxmox installed |
 | pve-02 | HP EliteDesk 705 G4 | k3s agent | 192.168.30.102 | ✅ Proxmox installed |
 | pve-03 | HP EliteDesk 705 G4 | k3s agent | 192.168.30.103 | ✅ Proxmox installed |
-| minio  | LXC on pve-01 | Terraform remote state | 192.168.30.100 | ⏳ Not started |
+| minio  | LXC on pve-01 | Terraform remote state | 192.168.30.100 | ✅ Running |
 
 - **VLAN:** 30
 - **Subnet:** 192.168.30.0/24
@@ -38,7 +38,7 @@
 | Phase | Description | Status |
 |-------|-------------|--------|
 | 1.1 | GitHub repo + CLUSTER-STATE.md | ✅ Complete |
-| 1.2 | Terraform backend decision | ✅ Complete — MinIO LXC on pve-01 |
+| 1.2 | Terraform backend decision | ✅ Complete — MinIO LXC on pve-01 (192.168.30.100) |
 | 1.3 | Proxmox prep (API tokens, networking) | ✅ Complete |
 | 1.4 | Terraform — provision k3s VMs | ⏳ Not started |
 | 1.5 | Ansible — OS config + k3s install | ⏳ Not started |
@@ -72,4 +72,8 @@
 ---
 
 ## Notes
-<!-- Add anything worth remembering — IP decisions, naming choices, lessons learned -->
+- MinIO API: http://192.168.30.100:9000
+- MinIO Console: http://192.168.30.100:9001
+- MinIO bucket for Terraform state: terraform-state
+- MinIO credentials stored locally (not in repo)
+- Proxmox API tokens created on all 3 nodes (root@pam!terraform) — secrets stored locally
