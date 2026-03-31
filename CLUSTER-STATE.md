@@ -38,8 +38,8 @@
 | Phase | Description | Status |
 |-------|-------------|--------|
 | 1.1 | GitHub repo + CLUSTER-STATE.md | ✅ Complete |
-| 1.2 | Terraform backend decision | ⏳ Not started |
-| 1.3 | Proxmox prep (API tokens, networking) | ⏳ In progress |
+| 1.2 | Terraform backend decision | ✅ Complete — MinIO LXC on pve-01 |
+| 1.3 | Proxmox prep (API tokens, networking) | ✅ Complete |
 | 1.4 | Terraform — provision k3s VMs | ⏳ Not started |
 | 1.5 | Ansible — OS config + k3s install | ⏳ Not started |
 | 1.6 | ArgoCD bootstrap | ⏳ Not started |
