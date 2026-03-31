@@ -14,10 +14,10 @@
 ## Infrastructure
 | Node | Hardware | Role | IP | Status |
 |------|----------|------|----|--------|
-| pve-01 | HP EliteDesk 705 G4 | k3s server (control plane) | 192.168.30.101 | ⏳ Not started |
-| pve-02 | HP EliteDesk 705 G4 | k3s agent | 192.168.30.102 | ⏳ Not started |
-| pve-03 | HP EliteDesk 705 G4 | k3s agent | 192.168.30.103 | ⏳ Not started |
-| minio | LXC on pve-01 | Terraform remote state | 192.168.30.100 | ⏳ Not started |
+| pve-01 | HP EliteDesk 705 G4 | k3s server (control plane) | 192.168.30.101 | ✅ Proxmox installed |
+| pve-02 | HP EliteDesk 705 G4 | k3s agent | 192.168.30.102 | ✅ Proxmox installed |
+| pve-03 | HP EliteDesk 705 G4 | k3s agent | 192.168.30.103 | ✅ Proxmox installed |
+| minio  | LXC on pve-01 | Terraform remote state | 192.168.30.100 | ⏳ Not started |
 
 - **VLAN:** 30
 - **Subnet:** 192.168.30.0/24
@@ -39,7 +39,7 @@
 |-------|-------------|--------|
 | 1.1 | GitHub repo + CLUSTER-STATE.md | ✅ Complete |
 | 1.2 | Terraform backend decision | ⏳ Not started |
-| 1.3 | Proxmox prep (API tokens, networking) | ⏳ Not started |
+| 1.3 | Proxmox prep (API tokens, networking) | ⏳ In progress |
 | 1.4 | Terraform — provision k3s VMs | ⏳ Not started |
 | 1.5 | Ansible — OS config + k3s install | ⏳ Not started |
 | 1.6 | ArgoCD bootstrap | ⏳ Not started |
