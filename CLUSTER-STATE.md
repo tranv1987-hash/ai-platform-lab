@@ -12,14 +12,17 @@
 ---
 
 ## Infrastructure
-| Node | Hardware | Role | Proxmox IP | Status |
-|------|----------|------|------------|--------|
-| pve-01 | HP EliteDesk 705 G4 | k3s server (control plane) | TBD | ⏳ Not started |
-| pve-02 | HP EliteDesk 705 G4 | k3s agent | TBD | ⏳ Not started |
-| pve-03 | HP EliteDesk 705 G4 | k3s agent | TBD | ⏳ Not started |
+| Node | Hardware | Role | IP | Status |
+|------|----------|------|----|--------|
+| pve-01 | HP EliteDesk 705 G4 | k3s server (control plane) | 192.168.30.101 | ⏳ Not started |
+| pve-02 | HP EliteDesk 705 G4 | k3s agent | 192.168.30.102 | ⏳ Not started |
+| pve-03 | HP EliteDesk 705 G4 | k3s agent | 192.168.30.103 | ⏳ Not started |
+| minio | LXC on pve-01 | Terraform remote state | 192.168.30.100 | ⏳ Not started |
 
 - **VLAN:** 30
-- **Subnet:** 192.168.30.x
+- **Subnet:** 192.168.30.0/24
+- **Gateway:** 192.168.30.1
+- **DNS:** 192.168.30.191 (Pi-hole)
 - **Workstation:** Acer Nitro V 15 (control machine)
 
 ---
