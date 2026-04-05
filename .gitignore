@@ -1,0 +1,10 @@
+# Terraform secrets — never commit these
+terraform.tfvars
+*.tfvars
+
+# Terraform local files — generated automatically, not needed in repo
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+crash.log
