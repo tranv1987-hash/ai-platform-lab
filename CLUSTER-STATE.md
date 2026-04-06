@@ -40,7 +40,7 @@
 | 1.1 | GitHub repo + CLUSTER-STATE.md | ✅ Complete |
 | 1.2 | Terraform backend decision | ✅ Complete — MinIO LXC on pve-01 (192.168.30.100) |
 | 1.3 | Proxmox prep (API tokens, networking) | ✅ Complete |
-| 1.4 | Terraform — provision k3s VMs | ⏳ Not started |
+| 1.4 | Terraform — provision k3s VMs | ⏳ In progress — terraform init complete |
 | 1.5 | Ansible — OS config + k3s install | ⏳ Not started |
 | 1.6 | ArgoCD bootstrap | ⏳ Not started |
 
@@ -77,3 +77,7 @@
 - MinIO bucket for Terraform state: terraform-state
 - MinIO credentials stored locally (not in repo)
 - Proxmox API tokens created on all 3 nodes (root@pam!terraform) — secrets stored locally
+- Terraform initialized successfully — backend connected to MinIO
+- bpg/proxmox provider v0.100.0 installed
+- Terraform working directory: ~/ai-platform-lab/terraform (WSL)
+- Always run git pull before terraform commands
