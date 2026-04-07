@@ -31,7 +31,10 @@
 ---
 
 ## Terraform Backend
-- [ ] Decision pending — local state vs MinIO on Proxmox (Phase 1.2)
+- **Type:** S3-compatible (MinIO)
+- **Endpoint:** http://192.168.30.100:9000
+- **Bucket:** terraform-state
+- **Key:** ai-platform-lab/terraform.tfstate
 
 ---
 
@@ -84,3 +87,8 @@
 - bpg/proxmox provider v0.100.0 installed
 - Terraform working directory: ~/ai-platform-lab/terraform (WSL)
 - Always run git pull before terraform commands
+- Each Proxmox node has its own provider alias (proxmox.pve01/02/03) — required for non-clustered Proxmox
+- terraform apply must be run from ~/ai-platform-lab/terraform in WSL
+- backend.hcl and terraform.tfvars are local only — never committed to GitHub
+- VM templates (ID 9000) exist on all 3 Proxmox nodes — Ubuntu 22.04 cloud image
+- SSH key for VM access: ~/.ssh/ai-platform-lab (WSL)
