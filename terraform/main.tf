@@ -1,4 +1,4 @@
-resource "proxmox_virtual_enviornment" "k3s_server"
+resource "proxmox_virtual_enviornment_vm" "k3s_server" {
   name       = "k3s-server"
   node_name  = "pve-01"
   vm_id      = 101
@@ -46,7 +46,7 @@ resource "proxmox_virtual_enviornment" "k3s_server"
   }
 }
 
-resource "proxmox_virtual_environment_vm" "k3s_agent_1"
+resource "proxmox_virtual_environment_vm" "k3s_agent_1" {
   name      = "k3s-agent-1"
   node_name = "pve-02"
   vm_id     = 102
@@ -75,7 +75,7 @@ resource "proxmox_virtual_environment_vm" "k3s_agent_1"
     bridge = "vmbr0"
   }
 
-  initilization {
+  initialization {
     ip_config {
       ipv4 {
         address = "192.168.30.112/24"
@@ -94,7 +94,7 @@ resource "proxmox_virtual_environment_vm" "k3s_agent_1"
   }
 }
 
-resource "proxmox_virtual_environment_vm" "k3s_agent-2" {
+resource "proxmox_virtual_environment_vm" "k3s_agent_2" {
   name       = "k3s-agent-2"
   node_name  = "pve-03"
   vm_id      = 103
@@ -119,7 +119,7 @@ resource "proxmox_virtual_environment_vm" "k3s_agent-2" {
     size         = 50
   }
 
-  network_devices {
+  network_device {
     bridge = "vmbr0"
   }
 
