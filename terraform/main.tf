@@ -1,7 +1,8 @@
 resource "proxmox_virtual_environment_vm" "k3s_server" {
-  name       = "k3s-server"
-  node_name  = "pve-01"
-  vm_id      = 101
+  provider  = proxmox.pve01
+  name      = "k3s-server"
+  node_name = "pve-01"
+  vm_id     = 101
 
   clone {
     vm_id = 9000
@@ -10,7 +11,7 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
 
   cpu {
     cores = 4
-    type = "x86-64-v2-AES"
+    type  = "x86-64-v2-AES"
   }
 
   memory {
@@ -47,13 +48,14 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
 }
 
 resource "proxmox_virtual_environment_vm" "k3s_agent_1" {
+  provider  = proxmox.pve02
   name      = "k3s-agent-1"
   node_name = "pve-02"
   vm_id     = 102
 
   clone {
-    vm_id  = 9000
-    full   = true
+    vm_id = 9000
+    full  = true
   }
 
   cpu {
@@ -95,9 +97,10 @@ resource "proxmox_virtual_environment_vm" "k3s_agent_1" {
 }
 
 resource "proxmox_virtual_environment_vm" "k3s_agent_2" {
-  name       = "k3s-agent-2"
-  node_name  = "pve-03"
-  vm_id      = 103
+  provider  = proxmox.pve03
+  name      = "k3s-agent-2"
+  node_name = "pve-03"
+  vm_id     = 103
 
   clone {
     vm_id = 9000
