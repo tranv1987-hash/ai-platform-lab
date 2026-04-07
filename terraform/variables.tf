@@ -1,10 +1,32 @@
-variable "proxmox_endpoint" {
-  description = "URL of the Proxmox API"
+variable "proxmox_endpoint_pve01" {
+  description = "URL of the Proxmox API on pve-01"
   type        = string
 }
 
-variable "proxmox_api_token" {
-  description = "Proxmox API token in format user@realm!tokenid=secret"
+variable "proxmox_endpoint_pve02" {
+  description = "URL of the Proxmox API on pve-02"
+  type        = string
+}
+
+variable "proxmox_endpoint_pve03" {
+  description = "URL of the Proxmox API on pve-03"
+  type        = string
+}
+
+variable "proxmox_api_token_pve01" {
+  description = "Proxmox API token for pve-01"
+  type        = string
+  sensitive   = true
+}
+
+variable "proxmox_api_token_pve02" {
+  description = "Proxmox API token for pve-02"
+  type        = string
+  sensitive   = true
+}
+
+variable "proxmox_api_token_pve03" {
+  description = "Proxmox API token for pve-03"
   type        = string
   sensitive   = true
 }
