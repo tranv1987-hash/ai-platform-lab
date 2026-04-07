@@ -18,6 +18,9 @@
 | pve-02 | HP EliteDesk 705 G4 | k3s agent | 192.168.30.102 | ✅ Proxmox installed |
 | pve-03 | HP EliteDesk 705 G4 | k3s agent | 192.168.30.103 | ✅ Proxmox installed |
 | minio  | LXC on pve-01 | Terraform remote state | 192.168.30.100 | ✅ Running |
+| k3s-server | Ubuntu 22.04 VM on pve-01 | k3s control plane | 192.168.30.111 | ✅ Running |
+| k3s-agent-1 | Ubuntu 22.04 VM on pve-02 | k3s agent | 192.168.30.112 | ✅ Running |
+| k3s-agent-2 | Ubuntu 22.04 VM on pve-03 | k3s agent | 192.168.30.113 | ✅ Running |
 
 - **VLAN:** 30
 - **Subnet:** 192.168.30.0/24
@@ -40,7 +43,7 @@
 | 1.1 | GitHub repo + CLUSTER-STATE.md | ✅ Complete |
 | 1.2 | Terraform backend decision | ✅ Complete — MinIO LXC on pve-01 (192.168.30.100) |
 | 1.3 | Proxmox prep (API tokens, networking) | ✅ Complete |
-| 1.4 | Terraform — provision k3s VMs | ⏳ In progress — terraform init complete |
+| 1.4 | Terraform — provision k3s VMs | ✅ Complete |
 | 1.5 | Ansible — OS config + k3s install | ⏳ Not started |
 | 1.6 | ArgoCD bootstrap | ⏳ Not started |
 
