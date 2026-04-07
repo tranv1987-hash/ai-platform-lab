@@ -1,4 +1,4 @@
-resource "proxmox_virtual_enviornment_vm" "k3s_server" {
+resource "proxmox_virtual_environment_vm" "k3s_server" {
   name       = "k3s-server"
   node_name  = "pve-01"
   vm_id      = 101
@@ -126,7 +126,7 @@ resource "proxmox_virtual_environment_vm" "k3s_agent_2" {
   initialization {
     ip_config {
       ipv4 {
-        address = "192.168.30.113/24'
+        address = "192.168.30.113/24"
         gateway = "192.168.30.1"
       }
     }
