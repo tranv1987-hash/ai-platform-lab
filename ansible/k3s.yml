@@ -1,0 +1,29 @@
+---
+- name: Install k3s server
+  hosts: k3s_server
+  become: true
+
+  tasks:
+    - name: Update apt packages
+      apt:
+        update_cache: true
+        upgrade: dist
+
+    - name: Install k3s server
+      shell: >
+        curl -sfL https://get.k3s.io | sh -s - server
+        --bind-adress={{ inventory_hostname }}
+        --node-ip={{ inventory_hostname }}
+        --tls-san={{ inventory_hostname }}
+      args:
+        creates: /usr/local/bin/k3s
+
+    - name: Wait for k3s to be ready
+      wait_for:
+        path: /var/lib/rancher/k3s/server/node-token
+        timeout: 60
+
+    - name: Get k3s node token
+      slurp:
+        src: /var/lib/rancher/k3s/server/node-token
+      register: k3s_token
