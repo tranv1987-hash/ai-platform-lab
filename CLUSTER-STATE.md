@@ -48,7 +48,7 @@
 | 1.3 | Proxmox prep (API tokens, networking) | ✅ Complete |
 | 1.4 | Terraform — provision k3s VMs | ✅ Complete |
 | 1.5 | Ansible — OS config + k3s install | ✅ Complete |
-| 1.6 | ArgoCD bootstrap | ⏳ Not started |
+| 1.6 | ArgoCD bootstrap | ✅ Complete |
 
 ### Chapter 2 — Core Services
 | Phase | Description | Status |
@@ -92,3 +92,7 @@
 - backend.hcl and terraform.tfvars are local only — never committed to GitHub
 - VM templates (ID 9000) exist on all 3 Proxmox nodes — Ubuntu 22.04 cloud image
 - SSH key for VM access: ~/.ssh/ai-platform-lab (WSL)
+- ArgoCD installed in argocd namespace — v stable
+- ArgoCD connected to https://github.com/tranv1987-hash/ai-platform-lab
+- ArgoCD UI accessible via port-forward: ssh -i ~/.ssh/ai-platform-lab -L 8080:localhost:8080 ubuntu@192.168.30.111 "sudo kubectl port-forward svc/argocd-server -n argocd 8080:443"
+- ArgoCD admin password set and initial secret deleted
