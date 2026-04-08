@@ -27,3 +27,21 @@
       slurp:
         src: /var/lib/rancher/k3s/server/node-token
       register: k3s_token
+      
+- name: Install k3s agents
+  hosts: k3s_agents
+  become: true
+
+  tasks:
+    - name: Update apt packages
+      apt:
+        update_cache: true
+        upgrade: dist
+
+    - name: Install k3s agent
+      shell: >
+        curl -sfL https://get.k3s.io | sh -s - agent
+        --server=https://192.168.30.111:6443
+        --token={{ hostvars['192.168.30.111']['k3s_token']['content'] | b64decode | trim }}
+      args:
+        creates: /usr/local/bin/k3s
