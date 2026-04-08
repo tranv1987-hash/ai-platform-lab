@@ -12,7 +12,7 @@
     - name: Install k3s server
       shell: >
         curl -sfL https://get.k3s.io | sh -s - server
-        --bind-adress={{ inventory_hostname }}
+        --bind-address={{ inventory_hostname }}
         --node-ip={{ inventory_hostname }}
         --tls-san={{ inventory_hostname }}
       args:
