@@ -53,7 +53,12 @@
 ### Chapter 2 — Core Services
 | Phase | Description | Status |
 |-------|-------------|--------|
-| 2.x | Vault + ESO, cert-manager, Traefik, Pi-hole DNS | ⏳ Not started |
+| 2.1 | MetalLB — IP address management | ✅ Complete — pool 192.168.30.120-150 |
+| 2.2 | Traefik — ingress controller | ⏳ In progress |
+| 2.3 | cert-manager — TLS certificates | ⏳ Not started |
+| 2.4 | ArgoCD — re-expose with real domain + TLS | ⏳ Not started |
+| 2.5 | Vault + ESO | ⏳ Not started |
+| 2.6 | Pi-hole DNS | ⏳ Not started |
 
 ### Chapter 3 — Monitoring
 | Phase | Description | Status |
