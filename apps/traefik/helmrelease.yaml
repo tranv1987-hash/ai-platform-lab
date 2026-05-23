@@ -16,8 +16,10 @@ spec:
             loadBalancerIP: 192.168.30.120
         ports:
           web:
-            redirectTo:
-              port: websecure
+            redirections:
+              entryPoint:
+                to: websecure
+                scheme: https
         logs:
           general:
             level: INFO
