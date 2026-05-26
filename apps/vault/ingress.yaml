@@ -5,9 +5,14 @@ metadata:
   namespace: vault
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/service.serversscheme: https
+    traefik.ingress.kubernetes.io/service.serversscheme: http
+    cert-manager.io/cluster-issuer: letsencrypt-cloudflare
 spec:
   ingressClassName: traefik
+  tls:
+    - hosts:
+        - vault.ai.vi3t-lab.com
+      secretName: vault-tls
   rules:
     - host: vault.ai.vi3t-lab.com
       http:
