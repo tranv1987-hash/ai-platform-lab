@@ -58,6 +58,8 @@
 | 2.3 | cert-manager — TLS certificates | ✅ Complete — ClusterIssuer: letsencrypt-cloudflare |
 | 2.4 | Cloudflare Tunnel — zero trust ingress | ✅ Complete — tunnel: ai-platform-lab |
 | 2.5 | ArgoCD — exposed via tunnel | ✅ Complete — argocd.vi3t-lab.com |
+| 2.6 | Vault — secrets management | ✅ Complete — vault.vi3t-lab.com |
+| 2.7 | ESO — External Secrets Operator | ✅ Complete — ClusterSecretStore: vault-backend |
 
 ### Chapter 3 — Monitoring
 | Phase | Description | Status |
@@ -103,3 +105,6 @@
 - Cloudflare Tunnel token stored as secret: cloudflare-tunnel-token in cloudflared namespace
 - cloudflared runs as 2 replicas in cloudflared namespace
 - All services exposed via Cloudflare Tunnel → Traefik at 192.168.30.120
+- Vault root token stored as secret: vault-token in external-secrets namespace
+- Vault unseal keys and root token saved offline — required after pod restart
+- ESO ClusterSecretStore: vault-backend connects to http://vault.vault.svc.cluster.local:8200
