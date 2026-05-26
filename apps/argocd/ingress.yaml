@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: argocd.vi3t-lab.com
+    - host: argocd.ai.vi3t-lab.com
       http:
         paths:
           - path: /
