@@ -5,8 +5,13 @@ metadata:
   namespace: argocd
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: letsencrypt-cloudflare
 spec:
   ingressClassName: traefik
+  tls:
+    - hosts:
+        - argocd.ai.vi3t-lab.com
+      secretName: argocd-tls
   rules:
     - host: argocd.ai.vi3t-lab.com
       http:
