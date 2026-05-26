@@ -98,7 +98,7 @@
 - SSH key for VM access: ~/.ssh/ai-platform-lab (WSL)
 - ArgoCD installed in argocd namespace — v stable
 - ArgoCD connected to https://github.com/tranv1987-hash/ai-platform-lab
-- ArgoCD UI accessible via port-forward: ssh -i ~/.ssh/ai-platform-lab -L 8080:localhost:8080 ubuntu@192.168.30.111 "sudo kubectl port-forward svc/argocd-server -n argocd 8080:443"
+- ArgoCD UI: https://argocd.vi3t-lab.com
 - ArgoCD admin password set and initial secret deleted
 - Cloudflare Tunnel token stored as secret: cloudflare-tunnel-token in cloudflared namespace
 - cloudflared runs as 2 replicas in cloudflared namespace
