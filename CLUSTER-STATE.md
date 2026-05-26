@@ -18,9 +18,9 @@
 | pve-02 | HP EliteDesk 705 G4 | k3s agent | 192.168.30.102 | ✅ Proxmox installed |
 | pve-03 | HP EliteDesk 705 G4 | k3s agent | 192.168.30.103 | ✅ Proxmox installed |
 | minio  | LXC on pve-01 | Terraform remote state | 192.168.30.100 | ✅ Running |
-| k3s-server  | Ubuntu 22.04 VM on pve-01 | k3s control plane | 192.168.30.111 | ✅ k3s Running |
-| k3s-agent-1 | Ubuntu 22.04 VM on pve-02 | k3s agent         | 192.168.30.112 | ✅ k3s Running |
-| k3s-agent-2 | Ubuntu 22.04 VM on pve-03 | k3s agent         | 192.168.30.113 | ✅ k3s Running |
+| k3s-server  | Ubuntu 22.04 VM on pve-01 | k3s control plane | 192.168.30.111 | ✅ k3s Running — 12GB RAM |
+| k3s-agent-1 | Ubuntu 22.04 VM on pve-02 | k3s agent         | 192.168.30.112 | ✅ k3s Running — 12GB RAM |
+| k3s-agent-2 | Ubuntu 22.04 VM on pve-03 | k3s agent         | 192.168.30.113 | ✅ k3s Running — 12GB RAM |
 
 - **VLAN:** 30
 - **Subnet:** 192.168.30.0/24
@@ -121,3 +121,4 @@
 - Both clusters share the same Pi-hole at 192.168.30.191 for DNS
 - Both clusters share the same vi3t-lab.com domain on Cloudflare
 - Pi cluster secrets: Sealed Secrets — AI platform lab secrets: Vault + ESO
+- VM RAM upgraded from 4GB to 12GB per node on 2026-05-25 — physical nodes have 16GB, 4GB reserved for Proxmox
