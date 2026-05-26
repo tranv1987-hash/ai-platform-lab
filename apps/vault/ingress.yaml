@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: vault.vi3t-lab.com
+    - host: vault.ai.vi3t-lab.com
       http:
         paths:
           - path: /
