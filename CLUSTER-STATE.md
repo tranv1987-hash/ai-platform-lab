@@ -60,6 +60,7 @@
 | 2.5 | ArgoCD — exposed via tunnel | ✅ Complete — argocd.vi3t-lab.com |
 | 2.6 | Vault — secrets management | ✅ Complete — vault.vi3t-lab.com |
 | 2.7 | ESO — External Secrets Operator | ✅ Complete — ClusterSecretStore: vault-backend |
+| 2.8 | Pi-hole DNS — internal resolution | ✅ Complete — *.ai.vi3t-lab.com → 192.168.30.120 |
 
 ### Chapter 3 — Monitoring
 | Phase | Description | Status |
@@ -108,3 +109,15 @@
 - Vault root token stored as secret: vault-token in external-secrets namespace
 - Vault unseal keys and root token saved offline — required after pod restart
 - ESO ClusterSecretStore: vault-backend connects to http://vault.vault.svc.cluster.local:8200
+- All *.ai.vi3t-lab.com subdomains resolve to 192.168.30.120 via Pi-hole
+- ArgoCD runs in insecure mode internally — TLS handled by Traefik
+- TLS certs issued by cert-manager via letsencrypt-cloudflare ClusterIssuer
+- Pi cluster (k3s-cluster repo) uses *.vi3t-lab.com → 192.168.30.190 (Traefik on Pi cluster)
+- AI platform lab uses *.ai.vi3t-lab.com → 192.168.30.120 (Traefik on HP EliteDesk cluster)
+- Pi cluster MetalLB pool: 192.168.30.190-230 — DO NOT use these IPs in ai-platform-lab
+- AI platform lab MetalLB pool: 192.168.30.120-150 — DO NOT use these IPs in Pi cluster
+- Pi cluster ArgoCD: argocd.vi3t-lab.com → 192.168.30.190
+- AI platform lab ArgoCD: argocd.ai.vi3t-lab.com → 192.168.30.120
+- Both clusters share the same Pi-hole at 192.168.30.191 for DNS
+- Both clusters share the same vi3t-lab.com domain on Cloudflare
+- Pi cluster secrets: Sealed Secrets — AI platform lab secrets: Vault + ESO
