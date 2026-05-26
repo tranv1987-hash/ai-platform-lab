@@ -15,7 +15,7 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
   }
 
   memory {
-    dedicated = 4096
+    dedicated = 12288
   }
 
   disk {
@@ -64,7 +64,7 @@ resource "proxmox_virtual_environment_vm" "k3s_agent_1" {
   }
 
   memory {
-    dedicated = 4096
+    dedicated = 12288
   }
 
   disk {
@@ -113,7 +113,7 @@ resource "proxmox_virtual_environment_vm" "k3s_agent_2" {
   }
 
   memory {
-    dedicated = 4096
+    dedicated = 12288
   }
 
   disk {
