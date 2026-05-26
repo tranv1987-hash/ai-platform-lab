@@ -55,10 +55,9 @@
 |-------|-------------|--------|
 | 2.1 | MetalLB — IP address management | ✅ Complete — pool 192.168.30.120-150 |
 | 2.2 | Traefik — ingress controller | ✅ Complete — 192.168.30.120 |
-| 2.3 | cert-manager — TLS certificates | ⏳ Not started |
-| 2.4 | ArgoCD — re-expose with real domain + TLS | ⏳ Not started |
-| 2.5 | Vault + ESO | ⏳ Not started |
-| 2.6 | Pi-hole DNS | ⏳ Not started |
+| 2.3 | cert-manager — TLS certificates | ✅ Complete — ClusterIssuer: letsencrypt-cloudflare |
+| 2.4 | Cloudflare Tunnel — zero trust ingress | ✅ Complete — tunnel: ai-platform-lab |
+| 2.5 | ArgoCD — exposed via tunnel | ✅ Complete — argocd.vi3t-lab.com |
 
 ### Chapter 3 — Monitoring
 | Phase | Description | Status |
@@ -101,3 +100,6 @@
 - ArgoCD connected to https://github.com/tranv1987-hash/ai-platform-lab
 - ArgoCD UI accessible via port-forward: ssh -i ~/.ssh/ai-platform-lab -L 8080:localhost:8080 ubuntu@192.168.30.111 "sudo kubectl port-forward svc/argocd-server -n argocd 8080:443"
 - ArgoCD admin password set and initial secret deleted
+- Cloudflare Tunnel token stored as secret: cloudflare-tunnel-token in cloudflared namespace
+- cloudflared runs as 2 replicas in cloudflared namespace
+- All services exposed via Cloudflare Tunnel → Traefik at 192.168.30.120
