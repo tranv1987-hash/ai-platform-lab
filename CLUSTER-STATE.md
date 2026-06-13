@@ -65,7 +65,8 @@
 ### Chapter 3 — Monitoring
 | Phase | Description | Status |
 |-------|-------------|--------|
-| 3.x | Prometheus + Grafana | ⏳ Not started |
+| 3.1 | kube-prometheus-stack deployed via ArgoCD | ✅ Complete |
+| 3.2 | Grafana exposure (ingress + tunnel + Vault-backed password) | ⏳ Not started |
 
 ### Chapter 4 — LLM Inference Gateway
 | Phase | Description | Status |
@@ -122,3 +123,8 @@
 - Both clusters share the same vi3t-lab.com domain on Cloudflare
 - Pi cluster secrets: Sealed Secrets — AI platform lab secrets: Vault + ESO
 - VM RAM upgraded from 4GB to 12GB per node on 2026-05-25 — physical nodes have 16GB, 4GB reserved for Proxmox
+- Monitoring: kube-prometheus-stack chart 86.2.2 in `monitoring` ns, ArgoCD app `kube-prometheus-stack`
+- Prometheus retention 10d / 20Gi local-path; Grafana 5Gi; Alertmanager 5Gi
+- All 3 node-exporters running (one per node)
+- Grafana admin password reset via `grafana cli admin reset-admin-password` (secret↔DB drift) — TEMPORARY, move to Vault+ESO in 3.2
+- Grafana currently INTERNAL ONLY — not yet exposed via tunnel
