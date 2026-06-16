@@ -66,7 +66,8 @@
 | Phase | Description | Status |
 |-------|-------------|--------|
 | 3.1 | kube-prometheus-stack deployed via ArgoCD | ✅ Complete |
-| 3.2 | Grafana exposure (ingress + tunnel + Vault-backed password) | ⏳ Not started |
+| 3.2a | Grafana admin password — Vault-backed via ESO | ✅ Complete |
+| 3.2b | Grafana exposure (ingress + cert + tunnel + DNS) | ⏳ Not started |
 
 ### Chapter 4 — LLM Inference Gateway
 | Phase | Description | Status |
@@ -128,3 +129,7 @@
 - All 3 node-exporters running (one per node)
 - Grafana admin password reset via `grafana cli admin reset-admin-password` (secret↔DB drift) — TEMPORARY, move to Vault+ESO in 3.2
 - Grafana currently INTERNAL ONLY — not yet exposed via tunnel
+- Enabled KV v2 engine at secret/ in Vault (was never mounted in Ch2 — ESO store pointed at nothing)
+- Grafana pw: Vault secret/grafana → ExternalSecret grafana-admin → k8s secret grafana-admin-credentials → grafana.admin.existingSecret
+- Grafana only seeds admin pw on a FRESH db — required wiping its PVC to re-seed
+- LESSON: editing inline values in an Application file does nothing until you re-apply the manifest (kubectl apply). They don't auto-sync from Git.
