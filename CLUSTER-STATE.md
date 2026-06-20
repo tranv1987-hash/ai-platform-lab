@@ -67,7 +67,7 @@
 |-------|-------------|--------|
 | 3.1 | kube-prometheus-stack deployed via ArgoCD | ✅ Complete |
 | 3.2a | Grafana admin password — Vault-backed via ESO | ✅ Complete |
-| 3.2b | Grafana exposure (ingress + cert + tunnel + DNS) | ⏳ Not started |
+| 3.2b | Grafana exposure — internal HTTPS (ingress + cert + Pi-hole DNS) | ✅ Complete |
 
 ### Chapter 4 — LLM Inference Gateway
 | Phase | Description | Status |
@@ -133,3 +133,25 @@
 - Grafana pw: Vault secret/grafana → ExternalSecret grafana-admin → k8s secret grafana-admin-credentials → grafana.admin.existingSecret
 - Grafana only seeds admin pw on a FRESH db — required wiping its PVC to re-seed
 - LESSON: editing inline values in an Application file does nothing until you re-apply the manifest (kubectl apply). They don't auto-sync from Git.
+
+
+
+
+### ⚠️ SECURITY — REVISIT: externally-routed sensitive services
+
+3 services have Cloudflare Tunnel routes (published application routes):
+- argocd.ai.vi3t-lab.com
+- vault.ai.vi3t-lab.com
+- grafana.ai.vi3t-lab.com
+
+State:
+- Internal access works via Pi-hole local DNS (per-host A record → 192.168.30.120 → Traefik).
+- External HTTPS currently FAILS at Cloudflare's edge — free Universal SSL doesn't cover
+  2-level subdomains (*.ai.vi3t-lab.com). So external access is blocked by an ACCIDENTAL
+  cert gap, NOT a deliberate control.
+- These are sensitive (Vault = all secrets, ArgoCD = deploy control, Grafana = full infra view).
+
+TODO — pick one:
+  (a) DELETE the tunnel routes + auto-created DNS → true internal-only (most secure), OR
+  (b) Add Cloudflare Access (auth gate) + Advanced Certificate Manager → secure external access.
+Leaving as-is for now = relying on a broken lock. Don't ship a portfolio this way without a note.
