@@ -57,10 +57,10 @@
 | 2.2 | Traefik — ingress controller | ✅ Complete — 192.168.30.120 |
 | 2.3 | cert-manager — TLS certificates | ✅ Complete — ClusterIssuer: letsencrypt-cloudflare |
 | 2.4 | Cloudflare Tunnel — zero trust ingress | ✅ Complete — tunnel: ai-platform-lab |
-| 2.5 | ArgoCD — exposed via tunnel | ✅ Complete — argocd.vi3t-lab.com |
-| 2.6 | Vault — secrets management | ✅ Complete — vault.vi3t-lab.com |
+| 2.5 | ArgoCD — exposed via tunnel | ✅ Complete — argocd.ai.vi3t-lab.com |
+| 2.6 | Vault — secrets management | ✅ Complete — vault.ai.vi3t-lab.com |
 | 2.7 | ESO — External Secrets Operator | ✅ Complete — ClusterSecretStore: vault-backend |
-| 2.8 | Pi-hole DNS — internal resolution | ✅ Complete — *.ai.vi3t-lab.com → 192.168.30.120 |
+| 2.8 | Pi-hole DNS — internal resolution | ✅ Complete — PER-HOST A records → 192.168.30.120 (NOT a wildcard) |
 
 ### Chapter 3 — Monitoring
 | Phase | Description | Status |
@@ -103,15 +103,14 @@
 - SSH key for VM access: ~/.ssh/ai-platform-lab (WSL)
 - ArgoCD installed in argocd namespace — v stable
 - ArgoCD connected to https://github.com/tranv1987-hash/ai-platform-lab
-- ArgoCD UI: https://argocd.vi3t-lab.com
+- ArgoCD UI: https://argocd.ai.vi3t-lab.com
 - ArgoCD admin password set and initial secret deleted
 - Cloudflare Tunnel token stored as secret: cloudflare-tunnel-token in cloudflared namespace
-- cloudflared runs as 2 replicas in cloudflared namespace
-- All services exposed via Cloudflare Tunnel → Traefik at 192.168.30.120
+- cloudflared runs as 2 replicas in cloudflared namespace — DASHBOARD-MANAGED routes (token-based, no local config); routes live in Cloudflare "Published application routes"
 - Vault root token stored as secret: vault-token in external-secrets namespace
-- Vault unseal keys and root token saved offline — required after pod restart
+- Vault unseal keys and root token saved offline — required after pod restart (threshold 2 of 3 keys)
 - ESO ClusterSecretStore: vault-backend connects to http://vault.vault.svc.cluster.local:8200
-- All *.ai.vi3t-lab.com subdomains resolve to 192.168.30.120 via Pi-hole
+- Pi-hole uses PER-HOST A records (NOT a wildcard) → 192.168.30.120. Each new *.ai.vi3t-lab.com service needs its OWN Pi-hole entry. Current: argocd, vault, grafana
 - ArgoCD runs in insecure mode internally — TLS handled by Traefik
 - TLS certs issued by cert-manager via letsencrypt-cloudflare ClusterIssuer
 - Pi cluster (k3s-cluster repo) uses *.vi3t-lab.com → 192.168.30.190 (Traefik on Pi cluster)
@@ -127,15 +126,15 @@
 - Monitoring: kube-prometheus-stack chart 86.2.2 in `monitoring` ns, ArgoCD app `kube-prometheus-stack`
 - Prometheus retention 10d / 20Gi local-path; Grafana 5Gi; Alertmanager 5Gi
 - All 3 node-exporters running (one per node)
-- Grafana admin password reset via `grafana cli admin reset-admin-password` (secret↔DB drift) — TEMPORARY, move to Vault+ESO in 3.2
-- Grafana currently INTERNAL ONLY — not yet exposed via tunnel
 - Enabled KV v2 engine at secret/ in Vault (was never mounted in Ch2 — ESO store pointed at nothing)
 - Grafana pw: Vault secret/grafana → ExternalSecret grafana-admin → k8s secret grafana-admin-credentials → grafana.admin.existingSecret
+- Grafana login: admin / password in Vault at secret/grafana (also k8s secret grafana-admin-credentials in monitoring ns)
 - Grafana only seeds admin pw on a FRESH db — required wiping its PVC to re-seed
+- Grafana ExternalSecret: apps/monitoring/externalsecret.yaml (refreshInterval 1h)
+- Grafana ingress: apps/monitoring/ingress.yaml (grafana-ingress) → internal HTTPS at grafana.ai.vi3t-lab.com; cert grafana-tls
+- Pi-hole record added: grafana.ai.vi3t-lab.com → 192.168.30.120
 - LESSON: editing inline values in an Application file does nothing until you re-apply the manifest (kubectl apply). They don't auto-sync from Git.
-
-
-
+- LESSON: GitHub raw CDN can serve STALE content even with cache-buster query params — verify against the live cluster (kubectl) or a local git pull, not the raw URL
 
 ### ⚠️ SECURITY — REVISIT: externally-routed sensitive services
 
